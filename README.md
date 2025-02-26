@@ -6,3 +6,4 @@ Este projeto é um sistema para gerenciamento de leilões, permitindo cadastro d
 - Java
 - MySQL
 - Git/GitHub
+- Visual Studio Code
