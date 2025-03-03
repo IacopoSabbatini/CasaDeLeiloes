@@ -3,12 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-/**
- *
- * @author Adm
- */
-public class cadastroVIEW extends javax.swing.JFrame {
 
+public class cadastroVIEW extends javax.swing.JFrame {
+         
+         
     /**
      * Creates new form cadastroVIEW
      */
@@ -77,12 +75,12 @@ public class cadastroVIEW extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
+                        .addGap(290, 290, 290)
                         .addComponent(btnCadastrar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(154, 154, 154)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,9 +122,9 @@ public class cadastroVIEW extends javax.swing.JFrame {
                     .addComponent(cadastroValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnCadastrar)
-                .addGap(18, 18, 18)
+                .addGap(68, 68, 68)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(btnProdutos)
                 .addGap(22, 22, 22))
         );
@@ -139,6 +137,11 @@ public class cadastroVIEW extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
+    private void clearFields(){
+        cadastroNome.setText(""); // Limpar campos
+        cadastroValor.setText("");
+    }
+    
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ProdutosDTO produto = new ProdutosDTO();
         String nome = cadastroNome.getText();
@@ -150,6 +153,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         
         ProdutosDAO produtodao = new ProdutosDAO();
         produtodao.cadastrarProduto(produto);
+        clearFields(); // Limpar 
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -162,6 +166,9 @@ public class cadastroVIEW extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        // Inicializa a tela de cadastro como principal
+        cadastroVIEW cadastroView = new cadastroVIEW();
+        cadastroView.setVisible(true);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
