@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-
+import java.awt.Component;
 
 public class ProdutosDAO {
     
@@ -64,6 +64,54 @@ public class ProdutosDAO {
         }
     }
 
+    public void venderProduto(Component parent, Integer id){
+        String query = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+    
+    // Criando conexão com o banco de dados
+    try (Connection conn = new conectaDAO().getConnection();
+         PreparedStatement prep = conn.prepareStatement(query)) {
+        
+        // Definir o parâmetro da consulta
+        prep.setInt(1, id);
+        
+        // Executar a atualização
+        int rowsAffected = prep.executeUpdate();
+        
+        // Exibir mensagem de sucesso ou erro caso nenhum produto seja atualizado
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(parent, "Produto vendido!");
+        } else {
+            JOptionPane.showMessageDialog(parent, "Nenhum produto foi encontrado com esse ID.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(parent, "Erro ao vender produto: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    
+     public ArrayList<ProdutosDTO> listarProdutosVendidos(){
+        ArrayList<ProdutosDTO> listagem = new ArrayList<>();
+        String query = "SELECT * FROM produtos WHERE status = 'Vendido'";
+
+        try (Connection conn = new conectaDAO().getConnection(); 
+             PreparedStatement prep = conn.prepareStatement(query);
+             ResultSet resultset = prep.executeQuery()) {
+
+            while (resultset.next()) {
+                ProdutosDTO prod = new ProdutosDTO();
+                prod.setId(resultset.getInt("id")); // Use o nome da coluna para evitar erros
+                prod.setNome(resultset.getString("nome"));
+                prod.setValor(resultset.getInt("valor"));
+                prod.setStatus(resultset.getString("status"));
+
+                listagem.add(prod);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listagem;
+     }
+     
     public ArrayList<ProdutosDTO> listarProdutos() {
         ArrayList<ProdutosDTO> produtos = new ArrayList<ProdutosDTO>();
 
