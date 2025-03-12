@@ -20,11 +20,14 @@ public class conectaDAO {
      Connection conn;
     PreparedStatement stm;
     ResultSet rs;
-    
-    // Login
+
     String db = "jdbc:mysql://localhost:3306/uc11";
     String user = "root";
     String senha = "Pudim23052003!";
+    
+    public Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(db, user, senha);
+    }
 
     public void connectDB() {
         //Connection conn = null;
